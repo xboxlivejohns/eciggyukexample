@@ -1,12 +1,584 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eciggy UK</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eciggy UK | Vape Shop & E-Liquid Specialists</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --brand: #7c3aed;
+      --brand-dark: #5b21b6;
+      --brand-light: #ede9fe;
+      --text: #1f2933;
+      --muted: #52606d;
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --accent: linear-gradient(135deg, #7c3aed, #22d3ee);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .top-bar {
+      background: var(--brand);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    header {
+      background: var(--surface);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--brand-dark);
+    }
+
+    .brand span {
+      display: inline-block;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    nav {
+      flex: 1;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.5rem;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: var(--brand-dark);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .cta-button {
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 12px 24px rgba(92, 78, 214, 0.24);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 32px rgba(92, 78, 214, 0.2);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      display: grid;
+      gap: 4rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      align-items: center;
+      background: var(--surface);
+      padding: 3rem;
+      border-radius: 28px;
+      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.18), transparent 55%),
+        radial-gradient(circle at bottom left, rgba(34, 211, 238, 0.18), transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      margin: 0 0 1rem;
+      color: #111827;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      margin: 0 0 1.5rem;
+      max-width: 32ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-weight: 600;
+      color: var(--brand-dark);
+    }
+
+    .hero-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hero-card h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-card strong {
+      font-size: 2.5rem;
+      color: var(--brand-dark);
+    }
+
+    section h2 {
+      font-size: 1.9rem;
+      margin-bottom: 0.75rem;
+      color: #111827;
+    }
+
+    section p.lead {
+      color: var(--muted);
+      max-width: 60ch;
+      margin-bottom: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card {
+      background: var(--surface);
+      padding: 1.75rem;
+      border-radius: 20px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+      display: grid;
+      gap: 1rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    .card span.eyebrow {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--brand-dark);
+      font-weight: 600;
+    }
+
+    .card h3 {
+      margin: 0;
+      color: #111827;
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .benefits {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .benefits li {
+      list-style: none;
+      background: rgba(124, 58, 237, 0.12);
+      color: var(--brand-dark);
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      font-weight: 600;
+    }
+
+    .cta-section {
+      background: var(--accent);
+      color: #fff;
+      border-radius: 28px;
+      padding: clamp(2.5rem, 6vw, 3.5rem);
+      display: grid;
+      gap: 1.5rem;
+      text-align: center;
+      box-shadow: 0 24px 48px rgba(124, 58, 237, 0.35);
+    }
+
+    .cta-section h2 {
+      color: inherit;
+      margin: 0;
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    }
+
+    .cta-section p {
+      margin: 0 auto;
+      max-width: 54ch;
+      font-size: 1.1rem;
+    }
+
+    .cta-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 3rem 1.5rem;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .footer-container h3 {
+      margin-top: 0;
+      color: #fff;
+    }
+
+    .footer-container ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .footer-container a {
+      color: inherit;
+      opacity: 0.75;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-container a:hover {
+      opacity: 1;
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      text-align: center;
+      color: rgba(226, 232, 240, 0.65);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 720px) {
+      .nav-container {
+        flex-direction: column;
+      }
+
+      nav ul {
+        justify-content: center;
+      }
+
+      .hero {
+        padding: 2.25rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Eciggy UK Website Coming Soon</h1>
-  <p>This is a placeholder page.</p>
+  <div class="top-bar">
+    <span>Free UK delivery on orders over £30</span>
+    <span>Questions? Call 0330 043 9980</span>
+    <span>Same-day dispatch before 4pm</span>
+  </div>
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand"><span>EU</span>Eciggy UK</a>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#disposables">Disposable Vapes</a></li>
+          <li><a href="#kits">Starter Kits</a></li>
+          <li><a href="#eliquids">E-Liquids</a></li>
+          <li><a href="#coils">Coils & Pods</a></li>
+          <li><a href="#support">Support</a></li>
+        </ul>
+      </nav>
+      <a class="cta-button" href="#shop">Shop All Vapes →</a>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="shop">
+      <div>
+        <h1>Your UK Vape Destination for Flavor, Value &amp; Expert Support</h1>
+        <p>
+          Eciggy UK helps you stay smoke-free with curated vape kits, bold disposable ranges,
+          and premium e-liquids sourced from trusted brands. Free delivery over £30, and real
+          humans ready to help.
+        </p>
+        <div class="hero-stats">
+          <span>1000+ 5★ Reviews</span>
+          <span>2500+ Products in Stock</span>
+          <span>100% Genuine Brands</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h2>Need a recommendation?</h2>
+        <div>
+          <strong>Let's talk.</strong>
+          <p>
+            Call us on 0330 043 9980 for tailored advice—from first vape kits to upgrading your
+            setup. We're real vapers who love to help.
+          </p>
+        </div>
+        <a class="cta-button" href="mailto:hello@eciggyuk.co.uk">Email the team</a>
+      </div>
+    </section>
+
+    <section id="disposables">
+      <h2>Disposable Vape Best Sellers</h2>
+      <p class="lead">Shop the hottest disposable vape brands with consistent flavour, long-lasting battery life, and great multi-buy offers.</p>
+      <div class="grid">
+        <article class="card">
+          <span class="eyebrow">Elf Bar</span>
+          <h3>Elfa Pro Prefilled Pod Kit</h3>
+          <p>Sleek rechargeable device with prefilled pods. Mix &amp; match flavours in seconds.</p>
+        </article>
+        <article class="card">
+          <span class="eyebrow">Lost Mary</span>
+          <h3>BM600 Disposable</h3>
+          <p>Iconic flavours and 20mg salt nic for smooth throat hits—perfect for on-the-go vaping.</p>
+        </article>
+        <article class="card">
+          <span class="eyebrow">SKE</span>
+          <h3>Crystal Bar 600</h3>
+          <p>Eye-catching design with consistent vapour production from first puff to last.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="kits">
+      <h2>Starter &amp; Advanced Vape Kits</h2>
+      <p class="lead">Whether you're transitioning from smoking or levelling up, our curated kits deliver everything you need inside the box.</p>
+      <div class="grid">
+        <article class="card">
+          <span class="eyebrow">New to vaping</span>
+          <h3>Simple Pod Kits</h3>
+          <p>Compact, leak-resistant devices with auto-draw technology. Just add your favourite nic salts.</p>
+        </article>
+        <article class="card">
+          <span class="eyebrow">Intermediate</span>
+          <h3>Adjustable Vape Mods</h3>
+          <p>Dial in airflow and wattage for the perfect MTL or RDL experience, with long-lasting batteries.</p>
+        </article>
+        <article class="card">
+          <span class="eyebrow">Enthusiast</span>
+          <h3>Sub-Ohm Powerhouses</h3>
+          <p>Cloud-chasing kits with mesh coils, colour displays, and advanced safety protections.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="eliquids">
+      <h2>E-Liquids for Every Palate</h2>
+      <p class="lead">From 10ml nic salts to 100ml shortfills, explore rich dessert blends, clean menthols, and fruity favourites.</p>
+      <div class="grid">
+        <article class="card">
+          <span class="eyebrow">Nic Salts</span>
+          <h3>Smooth nicotine hit</h3>
+          <p>Perfect for pod systems with quick absorption and refined throat hit.</p>
+        </article>
+        <article class="card">
+          <span class="eyebrow">50/50</span>
+          <h3>Balanced blends</h3>
+          <p>Ideal for starter kits—equal parts flavour and vapour production.</p>
+        </article>
+        <article class="card">
+          <span class="eyebrow">Shortfills</span>
+          <h3>Big bottles, bold taste</h3>
+          <p>Add nic shots for tailored strengths and enjoy layered flavour profiles.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="coils">
+      <h2>Coils, Pods &amp; Accessories</h2>
+      <p class="lead">Keep your kit running like new with genuine replacement parts shipped directly from our UK warehouse.</p>
+      <div class="grid">
+        <article class="card">
+          <span class="eyebrow">Mesh coils</span>
+          <h3>Maximum flavour</h3>
+          <p>Enhanced surface area for crisp flavour and dense vapour.</p>
+        </article>
+        <article class="card">
+          <span class="eyebrow">Replacement pods</span>
+          <h3>Leak-free vaping</h3>
+          <p>Fresh pods for your favourite kits—fill, click, enjoy.</p>
+        </article>
+        <article class="card">
+          <span class="eyebrow">Chargers &amp; cases</span>
+          <h3>Always ready</h3>
+          <p>Keep your gear protected with durable cases and fast USB-C chargers.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="support">
+      <h2>Why Shop With Eciggy UK?</h2>
+      <p class="lead">We're more than an online basket—we're a team of vape experts dedicated to making your journey smooth, safe, and satisfying.</p>
+      <ul class="benefits">
+        <li>Friendly UK-based support</li>
+        <li>Age-verified purchasing</li>
+        <li>Trusted, TPD-compliant brands</li>
+        <li>Secure payments &amp; Klarna available</li>
+      </ul>
+    </section>
+
+    <section class="cta-section">
+      <h2>Ready to explore the full Eciggy UK range?</h2>
+      <p>Browse disposables, pod kits, coils, and e-liquids curated by vapers for vapers. Join the smoke-free community today.</p>
+      <div class="cta-links">
+        <a class="cta-button" href="#disposables">Shop Disposables</a>
+        <a class="cta-button" href="#eliquids">Shop E-Liquids</a>
+        <a class="cta-button" href="#support">Contact Support</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Eciggy UK</h3>
+        <p>Registered UK vape retailer supplying high-quality vaping hardware and e-liquids since 2012.</p>
+      </div>
+      <div>
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="#disposables">Disposable Vapes</a></li>
+          <li><a href="#kits">Starter Kits</a></li>
+          <li><a href="#eliquids">E-Liquids</a></li>
+          <li><a href="#coils">Coils &amp; Pods</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="mailto:hello@eciggyuk.co.uk">Email Support</a></li>
+          <li><a href="tel:03300439980">0330 043 9980</a></li>
+          <li><a href="#">Delivery &amp; Returns</a></li>
+          <li><a href="#">Age Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Stay in the loop</h3>
+        <p>Sign up for vape news, flavour drops, and exclusive offers.</p>
+        <form aria-label="Newsletter signup">
+          <label for="email" class="sr-only">Email address</label>
+          <input id="email" type="email" name="email" placeholder="Email address" required style="
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 999px;
+            border: none;
+            margin-bottom: 0.75rem;
+          " />
+          <button type="submit" class="cta-button" style="width: 100%; justify-content: center;">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <p class="footer-bottom">© <span id="year"></span> Eciggy UK. Vape responsibly. 18+ only.</p>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
