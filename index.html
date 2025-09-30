@@ -350,6 +350,60 @@
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
+    .flavour-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .flavour-card {
+      background: var(--surface);
+      border-radius: 24px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+      overflow: hidden;
+      display: grid;
+    }
+
+    .flavour-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .flavour-card__body {
+      padding: 1.75rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .flavour-card__body h3 {
+      margin: 0;
+      color: #111827;
+      font-size: 1.25rem;
+    }
+
+    .flavour-card__body p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .flavour-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      color: var(--brand-dark);
+    }
+
+    .flavour-card__cta::after {
+      content: "→";
+      transition: transform 0.2s ease;
+    }
+
+    .flavour-card:hover .flavour-card__cta::after {
+      transform: translateX(4px);
+    }
+
     .card {
       background: var(--surface);
       padding: 1.75rem;
@@ -617,6 +671,77 @@
           <h3>Big bottles, bold taste</h3>
           <p>Add nic shots for tailored strengths and enjoy layered flavour profiles.</p>
         </article>
+      </div>
+    </section>
+
+    <section id="shortfills">
+      <h2>Eciggy Signature Shortfill Range</h2>
+      <p class="lead">Pair our new artwork collection with detailed product guides for every flavour in the Eciggy line-up.</p>
+      <div class="flavour-grid">
+        <a class="flavour-card" href="products/blackcurrant.html">
+          <img src="blackcurrant.png" alt="Eciggy Blackcurrant Burst shortfill bottle" />
+          <div class="flavour-card__body">
+            <h3>Blackcurrant Burst</h3>
+            <p>Woodland berries chilled with a frosty exhale.</p>
+            <span class="flavour-card__cta">View product</span>
+          </div>
+        </a>
+        <a class="flavour-card" href="products/bubblegum.html">
+          <img src="bubblegum.png" alt="Eciggy Bubblegum Blitz shortfill bottle" />
+          <div class="flavour-card__body">
+            <h3>Bubblegum Blitz</h3>
+            <p>Nostalgic candy sweetness with a cool twist.</p>
+            <span class="flavour-card__cta">View product</span>
+          </div>
+        </a>
+        <a class="flavour-card" href="products/cherrycola.html">
+          <img src="cherrycola.png" alt="Eciggy Cherry Cola Fizz shortfill bottle" />
+          <div class="flavour-card__body">
+            <h3>Cherry Cola Fizz</h3>
+            <p>Sparkling cola syrup with dark cherry depth.</p>
+            <span class="flavour-card__cta">View product</span>
+          </div>
+        </a>
+        <a class="flavour-card" href="products/fruitilicious.html">
+          <img src="fruitilicious.png" alt="Eciggy Fruiti-Licious Punch shortfill bottle" />
+          <div class="flavour-card__body">
+            <h3>Fruiti-Licious Punch</h3>
+            <p>Tropical medley of pineapple, mango and kiwi.</p>
+            <span class="flavour-card__cta">View product</span>
+          </div>
+        </a>
+        <a class="flavour-card" href="products/jackblack.html">
+          <img src="jackblack.png" alt="Eciggy Jack Black shortfill bottle" />
+          <div class="flavour-card__body">
+            <h3>Jack Black</h3>
+            <p>Aniseed and liquorice with a menthol lift.</p>
+            <span class="flavour-card__cta">View product</span>
+          </div>
+        </a>
+        <a class="flavour-card" href="products/lemonsherbet.html">
+          <img src="lemonsherbet.png" alt="Eciggy Lemon Sherbet Pop shortfill bottle" />
+          <div class="flavour-card__body">
+            <h3>Lemon Sherbet Pop</h3>
+            <p>Zingy lemon candy with fizzy sherbet.</p>
+            <span class="flavour-card__cta">View product</span>
+          </div>
+        </a>
+        <a class="flavour-card" href="products/strawgasm.html">
+          <img src="strawgasm.png" alt="Eciggy Strawgasm shortfill bottle" />
+          <div class="flavour-card__body">
+            <h3>Strawgasm</h3>
+            <p>Strawberries and cream dessert clouds.</p>
+            <span class="flavour-card__cta">View product</span>
+          </div>
+        </a>
+        <a class="flavour-card" href="products/watermelon.html">
+          <img src="watermelon.png" alt="Eciggy Watermelon Wave shortfill bottle" />
+          <div class="flavour-card__body">
+            <h3>Watermelon Wave</h3>
+            <p>Refreshing melon blend with icy finish.</p>
+            <span class="flavour-card__cta">View product</span>
+          </div>
+        </a>
       </div>
     </section>
 
