@@ -8,14 +8,15 @@
     :root {
       color-scheme: light;
       font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --brand: #7c3aed;
-      --brand-dark: #5b21b6;
-      --brand-light: #ede9fe;
-      --text: #1f2933;
-      --muted: #52606d;
-      --bg: #f5f7fa;
+      --brand: #08b0ff;
+      --brand-dark: #042340;
+      --brand-light: #e6f7ff;
+      --secondary: #00d1b2;
+      --text: #0f172a;
+      --muted: #475569;
+      --bg: #f2f7fc;
       --surface: #ffffff;
-      --accent: linear-gradient(135deg, #7c3aed, #22d3ee);
+      --accent: linear-gradient(135deg, var(--brand), var(--secondary));
     }
 
     * {
@@ -130,7 +131,7 @@
     }
 
     .top-bar {
-      background: var(--brand);
+      background: var(--brand-dark);
       color: #fff;
       padding: 0.5rem 1rem;
       font-size: 0.9rem;
@@ -147,7 +148,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 4px 16px rgba(4, 35, 64, 0.08);
     }
 
     .nav-container {
@@ -161,24 +162,25 @@
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 0.75rem;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--brand-dark);
     }
 
-    .brand span {
-      display: inline-block;
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: var(--accent);
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-size: 1rem;
+    .brand-logo {
+      display: block;
+      height: 44px;
+      width: auto;
+      filter: drop-shadow(0 8px 18px rgba(4, 35, 64, 0.18));
+    }
+
+    .brand-text {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+      opacity: 0.8;
     }
 
     nav {
@@ -203,7 +205,7 @@
 
     nav a:hover,
     nav a:focus {
-      color: var(--brand-dark);
+      color: var(--brand);
     }
 
     .sr-only {
@@ -218,21 +220,25 @@
     }
 
     .cta-button {
-      padding: 0.6rem 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1.2rem;
       border-radius: 999px;
+      border: none;
       background: var(--accent);
       color: #fff;
       font-weight: 600;
-      box-shadow: 0 12px 24px rgba(92, 78, 214, 0.24);
+      font-size: 0.95rem;
+      box-shadow: 0 16px 40px rgba(4, 35, 64, 0.18);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
     }
 
-    .cta-button:hover {
+    .cta-button:hover,
+    .cta-button:focus {
       transform: translateY(-1px);
-      box-shadow: 0 20px 32px rgba(92, 78, 214, 0.2);
+      box-shadow: 0 20px 44px rgba(4, 35, 64, 0.24);
     }
 
     main {
@@ -248,20 +254,20 @@
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
       align-items: center;
-      background: var(--surface);
-      padding: 3rem;
+      background: linear-gradient(135deg, rgba(4, 35, 64, 0.96), rgba(8, 176, 255, 0.88));
+      padding: 3.25rem;
       border-radius: 28px;
-      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 32px 60px rgba(4, 35, 64, 0.25);
       position: relative;
       overflow: hidden;
+      color: #f8fafc;
     }
 
     .hero::after {
       content: "";
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.18), transparent 55%),
-        radial-gradient(circle at bottom left, rgba(34, 211, 238, 0.18), transparent 50%);
+      inset: -30% -25% 20% 55%;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.28), transparent 65%);
       pointer-events: none;
     }
 
@@ -271,47 +277,59 @@
     }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-size: clamp(2.4rem, 4vw, 3.25rem);
       margin: 0 0 1rem;
-      color: #111827;
+      color: #fff;
       letter-spacing: -0.02em;
     }
 
     .hero p {
       margin: 0 0 1.5rem;
       max-width: 32ch;
-      color: var(--muted);
+      color: rgba(226, 232, 240, 0.86);
       font-size: 1.05rem;
     }
 
     .hero-stats {
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
       font-weight: 600;
-      color: var(--brand-dark);
+      color: #e2f2ff;
+    }
+
+    .hero-stats span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(6px);
     }
 
     .hero-card {
-      background: #fff;
-      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.28);
+      border-radius: 22px;
       padding: 2rem;
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
+      box-shadow: 0 24px 40px rgba(4, 35, 64, 0.28);
       display: grid;
       gap: 1rem;
+      color: #fff;
+      border: 1px solid rgba(148, 197, 255, 0.25);
     }
 
     .hero-card h2 {
       margin: 0;
-      font-size: 1.1rem;
-      color: var(--muted);
+      font-size: 1rem;
+      color: rgba(226, 232, 240, 0.75);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
     }
 
     .hero-card strong {
       font-size: 2.5rem;
-      color: var(--brand-dark);
+      color: #fff;
     }
 
     section h2 {
@@ -412,7 +430,7 @@
     }
 
     footer {
-      background: #0f172a;
+      background: var(--brand-dark);
       color: #e2e8f0;
       padding: 3rem 1.5rem;
     }
@@ -492,7 +510,10 @@
   </div>
   <header>
     <div class="nav-container">
-      <a href="#" class="brand"><span>EU</span>Eciggy UK</a>
+      <a href="#" class="brand" aria-label="Eciggy UK home">
+        <img src="logo.png" alt="Eciggy UK" class="brand-logo" />
+        <span class="brand-text">Vape Specialists</span>
+      </a>
       <nav aria-label="Primary">
         <ul>
           <li><a href="#disposables">Disposable Vapes</a></li>
