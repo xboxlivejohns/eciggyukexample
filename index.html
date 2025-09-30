@@ -4,544 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eciggy UK | Vape Shop & E-Liquid Specialists</title>
-  <style>
-    :root {
-      color-scheme: light;
-      font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --brand: #08b0ff;
-      --brand-dark: #042340;
-      --brand-light: #e6f7ff;
-      --secondary: #00d1b2;
-      --text: #0f172a;
-      --muted: #475569;
-      --bg: #f2f7fc;
-      --surface: #ffffff;
-      --accent: linear-gradient(135deg, var(--brand), var(--secondary));
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    body.no-scroll {
-      overflow: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .age-gate {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.78);
-      backdrop-filter: blur(6px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      z-index: 9999;
-    }
-
-    .age-gate[aria-hidden="false"] {
-      display: flex;
-    }
-
-    .age-gate__dialog {
-      max-width: 420px;
-      width: min(100%, 420px);
-      background: var(--surface);
-      border-radius: 24px;
-      padding: 2.5rem 2.25rem;
-      box-shadow: 0 32px 60px rgba(15, 23, 42, 0.25);
-      text-align: center;
-      position: relative;
-    }
-
-    .age-gate__badge {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      margin: 0 auto 1.5rem;
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: #fff;
-      background: var(--accent);
-    }
-
-    .age-gate__title {
-      font-size: 1.75rem;
-      margin: 0 0 0.75rem;
-      color: var(--brand-dark);
-    }
-
-    .age-gate__text {
-      color: var(--muted);
-      margin: 0 0 1.75rem;
-    }
-
-    .age-gate__actions {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .age-gate__confirm,
-    .age-gate__exit {
-      border: none;
-      border-radius: 999px;
-      padding: 0.85rem 1.25rem;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .age-gate__confirm {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 16px 32px rgba(92, 78, 214, 0.24);
-    }
-
-    .age-gate__confirm:hover,
-    .age-gate__confirm:focus {
-      transform: translateY(-1px);
-      box-shadow: 0 20px 40px rgba(92, 78, 214, 0.28);
-    }
-
-    .age-gate__exit {
-      background: var(--surface);
-      color: var(--brand-dark);
-      border: 1px solid rgba(124, 58, 237, 0.25);
-    }
-
-    .age-gate__exit:hover,
-    .age-gate__exit:focus {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 28px rgba(15, 23, 42, 0.12);
-    }
-
-    .top-bar {
-      background: var(--brand-dark);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    header {
-      background: var(--surface);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 16px rgba(4, 35, 64, 0.08);
-    }
-
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .brand-logo {
-      display: block;
-      height: 44px;
-      width: auto;
-      filter: drop-shadow(0 8px 18px rgba(4, 35, 64, 0.18));
-    }
-
-    .brand-text {
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      color: var(--brand-dark);
-      opacity: 0.8;
-    }
-
-    nav {
-      flex: 1;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: flex-end;
-      gap: 1.5rem;
-      padding: 0;
-      margin: 0;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      font-weight: 600;
-      color: var(--muted);
-      transition: color 0.2s ease;
-    }
-
-    nav a:hover,
-    nav a:focus {
-      color: var(--brand);
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-    }
-
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      padding: 0.75rem 1.2rem;
-      border-radius: 999px;
-      border: none;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.95rem;
-      box-shadow: 0 16px 40px rgba(4, 35, 64, 0.18);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .cta-button:hover,
-    .cta-button:focus {
-      transform: translateY(-1px);
-      box-shadow: 0 20px 44px rgba(4, 35, 64, 0.24);
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem 4rem;
-      display: grid;
-      gap: 4rem;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      align-items: center;
-      background: linear-gradient(135deg, rgba(4, 35, 64, 0.96), rgba(8, 176, 255, 0.88));
-      padding: 3.25rem;
-      border-radius: 28px;
-      box-shadow: 0 32px 60px rgba(4, 35, 64, 0.25);
-      position: relative;
-      overflow: hidden;
-      color: #f8fafc;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: -30% -25% 20% 55%;
-      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.28), transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 4vw, 3.25rem);
-      margin: 0 0 1rem;
-      color: #fff;
-      letter-spacing: -0.02em;
-    }
-
-    .hero p {
-      margin: 0 0 1.5rem;
-      max-width: 32ch;
-      color: rgba(226, 232, 240, 0.86);
-      font-size: 1.05rem;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      font-weight: 600;
-      color: #e2f2ff;
-    }
-
-    .hero-stats span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.6rem 1rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(6px);
-    }
-
-    .hero-card {
-      background: rgba(15, 23, 42, 0.28);
-      border-radius: 22px;
-      padding: 2rem;
-      box-shadow: 0 24px 40px rgba(4, 35, 64, 0.28);
-      display: grid;
-      gap: 1rem;
-      color: #fff;
-      border: 1px solid rgba(148, 197, 255, 0.25);
-    }
-
-    .hero-card h2 {
-      margin: 0;
-      font-size: 1rem;
-      color: rgba(226, 232, 240, 0.75);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .hero-card strong {
-      font-size: 2.5rem;
-      color: #fff;
-    }
-
-    section h2 {
-      font-size: 1.9rem;
-      margin-bottom: 0.75rem;
-      color: #111827;
-    }
-
-    section p.lead {
-      color: var(--muted);
-      max-width: 60ch;
-      margin-bottom: 2rem;
-    }
-
-    .grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .flavour-grid {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-
-    .flavour-card {
-      background: var(--surface);
-      border-radius: 24px;
-      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
-      overflow: hidden;
-      display: grid;
-    }
-
-    .flavour-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-
-    .flavour-card__body {
-      padding: 1.75rem;
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .flavour-card__body h3 {
-      margin: 0;
-      color: #111827;
-      font-size: 1.25rem;
-    }
-
-    .flavour-card__body p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .flavour-card__cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-weight: 600;
-      color: var(--brand-dark);
-    }
-
-    .flavour-card__cta::after {
-      content: "→";
-      transition: transform 0.2s ease;
-    }
-
-    .flavour-card:hover .flavour-card__cta::after {
-      transform: translateX(4px);
-    }
-
-    .card {
-      background: var(--surface);
-      padding: 1.75rem;
-      border-radius: 20px;
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
-      display: grid;
-      gap: 1rem;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 40px rgba(15, 23, 42, 0.12);
-    }
-
-    .card span.eyebrow {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--brand-dark);
-      font-weight: 600;
-    }
-
-    .card h3 {
-      margin: 0;
-      color: #111827;
-      font-size: 1.25rem;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .benefits {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-
-    .benefits li {
-      list-style: none;
-      background: rgba(124, 58, 237, 0.12);
-      color: var(--brand-dark);
-      padding: 0.85rem 1rem;
-      border-radius: 14px;
-      font-weight: 600;
-    }
-
-    .cta-section {
-      background: var(--accent);
-      color: #fff;
-      border-radius: 28px;
-      padding: clamp(2.5rem, 6vw, 3.5rem);
-      display: grid;
-      gap: 1.5rem;
-      text-align: center;
-      box-shadow: 0 24px 48px rgba(124, 58, 237, 0.35);
-    }
-
-    .cta-section h2 {
-      color: inherit;
-      margin: 0;
-      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-    }
-
-    .cta-section p {
-      margin: 0 auto;
-      max-width: 54ch;
-      font-size: 1.1rem;
-    }
-
-    .cta-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    footer {
-      background: var(--brand-dark);
-      color: #e2e8f0;
-      padding: 3rem 1.5rem;
-    }
-
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .footer-container h3 {
-      margin-top: 0;
-      color: #fff;
-    }
-
-    .footer-container ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 0.5rem;
-    }
-
-    .footer-container a {
-      color: inherit;
-      opacity: 0.75;
-      transition: opacity 0.2s ease;
-    }
-
-    .footer-container a:hover {
-      opacity: 1;
-    }
-
-    .footer-bottom {
-      max-width: 1100px;
-      margin: 2rem auto 0;
-      text-align: center;
-      color: rgba(226, 232, 240, 0.65);
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 720px) {
-      .nav-container {
-        flex-direction: column;
-      }
-
-      nav ul {
-        justify-content: center;
-      }
-
-      .hero {
-        padding: 2.25rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body>
   <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-hidden="true">
@@ -565,7 +28,7 @@
   <header>
     <div class="nav-container">
       <a href="#" class="brand" aria-label="Eciggy UK home">
-        <img src="logo.png" alt="Eciggy UK" class="brand-logo" />
+        <img src="assets/images/logo.png" alt="Eciggy UK" class="brand-logo" />
         <span class="brand-text">Vape Specialists</span>
       </a>
       <nav aria-label="Primary">
@@ -679,7 +142,7 @@
       <p class="lead">Pair our new artwork collection with detailed product guides for every flavour in the Eciggy line-up.</p>
       <div class="flavour-grid">
         <a class="flavour-card" href="products/blackcurrant.html">
-          <img src="blackcurrant.png" alt="Eciggy Blackcurrant Burst shortfill bottle" />
+          <img src="assets/images/blackcurrant.png" alt="Eciggy Blackcurrant Burst shortfill bottle" />
           <div class="flavour-card__body">
             <h3>Blackcurrant Burst</h3>
             <p>Woodland berries chilled with a frosty exhale.</p>
@@ -687,7 +150,7 @@
           </div>
         </a>
         <a class="flavour-card" href="products/bubblegum.html">
-          <img src="bubblegum.png" alt="Eciggy Bubblegum Blitz shortfill bottle" />
+          <img src="assets/images/bubblegum.png" alt="Eciggy Bubblegum Blitz shortfill bottle" />
           <div class="flavour-card__body">
             <h3>Bubblegum Blitz</h3>
             <p>Nostalgic candy sweetness with a cool twist.</p>
@@ -695,7 +158,7 @@
           </div>
         </a>
         <a class="flavour-card" href="products/cherrycola.html">
-          <img src="cherrycola.png" alt="Eciggy Cherry Cola Fizz shortfill bottle" />
+          <img src="assets/images/cherrycola.png" alt="Eciggy Cherry Cola Fizz shortfill bottle" />
           <div class="flavour-card__body">
             <h3>Cherry Cola Fizz</h3>
             <p>Sparkling cola syrup with dark cherry depth.</p>
@@ -703,7 +166,7 @@
           </div>
         </a>
         <a class="flavour-card" href="products/fruitilicious.html">
-          <img src="fruitilicious.png" alt="Eciggy Fruiti-Licious Punch shortfill bottle" />
+          <img src="assets/images/fruitilicious.png" alt="Eciggy Fruiti-Licious Punch shortfill bottle" />
           <div class="flavour-card__body">
             <h3>Fruiti-Licious Punch</h3>
             <p>Tropical medley of pineapple, mango and kiwi.</p>
@@ -711,7 +174,7 @@
           </div>
         </a>
         <a class="flavour-card" href="products/jackblack.html">
-          <img src="jackblack.png" alt="Eciggy Jack Black shortfill bottle" />
+          <img src="assets/images/jackblack.png" alt="Eciggy Jack Black shortfill bottle" />
           <div class="flavour-card__body">
             <h3>Jack Black</h3>
             <p>Aniseed and liquorice with a menthol lift.</p>
@@ -719,7 +182,7 @@
           </div>
         </a>
         <a class="flavour-card" href="products/lemonsherbet.html">
-          <img src="lemonsherbet.png" alt="Eciggy Lemon Sherbet Pop shortfill bottle" />
+          <img src="assets/images/lemonsherbet.png" alt="Eciggy Lemon Sherbet Pop shortfill bottle" />
           <div class="flavour-card__body">
             <h3>Lemon Sherbet Pop</h3>
             <p>Zingy lemon candy with fizzy sherbet.</p>
@@ -727,7 +190,7 @@
           </div>
         </a>
         <a class="flavour-card" href="products/strawgasm.html">
-          <img src="strawgasm.png" alt="Eciggy Strawgasm shortfill bottle" />
+          <img src="assets/images/strawgasm.png" alt="Eciggy Strawgasm shortfill bottle" />
           <div class="flavour-card__body">
             <h3>Strawgasm</h3>
             <p>Strawberries and cream dessert clouds.</p>
@@ -735,7 +198,7 @@
           </div>
         </a>
         <a class="flavour-card" href="products/watermelon.html">
-          <img src="watermelon.png" alt="Eciggy Watermelon Wave shortfill bottle" />
+          <img src="assets/images/watermelon.png" alt="Eciggy Watermelon Wave shortfill bottle" />
           <div class="flavour-card__body">
             <h3>Watermelon Wave</h3>
             <p>Refreshing melon blend with icy finish.</p>
@@ -831,45 +294,6 @@
     </div>
     <p class="footer-bottom">© <span id="year"></span> Eciggy UK. Vape responsibly. 18+ only.</p>
   </footer>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    (function () {
-      const gate = document.getElementById("ageGate");
-      const confirmBtn = document.getElementById("ageGateConfirm");
-      const exitBtn = document.getElementById("ageGateExit");
-
-      if (!gate || !confirmBtn || !exitBtn) {
-        return;
-      }
-
-      const storageKey = "eciggy-age-verified";
-      const hasVerified = window.localStorage.getItem(storageKey) === "true";
-
-      const showGate = () => {
-        gate.setAttribute("aria-hidden", "false");
-        document.body.classList.add("no-scroll");
-        confirmBtn.focus();
-      };
-
-      const hideGate = () => {
-        gate.setAttribute("aria-hidden", "true");
-        document.body.classList.remove("no-scroll");
-      };
-
-      if (!hasVerified) {
-        showGate();
-      }
-
-      confirmBtn.addEventListener("click", () => {
-        window.localStorage.setItem(storageKey, "true");
-        hideGate();
-      });
-
-      exitBtn.addEventListener("click", () => {
-        window.location.href = "https://www.google.com";
-      });
-    })();
-  </script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
